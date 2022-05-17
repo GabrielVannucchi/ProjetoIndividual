@@ -1,0 +1,30 @@
+/*#9cd6c8, #f1ffcf, #f8df82, #fac055, #e57c3a*/
+body{
+    background-color: #f1ffcf;
+    margin: 0;
+    padding: 0;
+}
+.container{
+    width: 80%;
+    margin: auto;
+    display: flex;
+}
+/* header */
+.header {
+    background-color: #f8df82;
+    border-bottom: 3px solid #e57c3a;
+}
+
+/* footer */
+.footer {
+    background-color: #f8df82;
+    height: 150px;
+    color: #fff;
+    display: flex;
+    font-size: 15px;
+  }
+  
+  .footer .container {
+    justify-content: center;
+  }
+  
