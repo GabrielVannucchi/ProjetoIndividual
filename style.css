@@ -1,6 +1,11 @@
 /*#9cd6c8, #f1ffcf, #f8df82, #fac055, #e57c3a*/
+/*#876445, #CA965C, #EEC373, #F4DFBA*/
+
+:root{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 body{
-    background-color: #f1ffcf;
+    background-color: #F4DFBA;
     margin: 0;
     padding: 0;
 }
@@ -9,22 +14,109 @@ body{
     margin: auto;
     display: flex;
 }
+
 /* header */
 .header {
-    background-color: #f8df82;
-    border-bottom: 3px solid #e57c3a;
+    background-color: #CA965C;
+    border-bottom: 3px solid #876445;
+}
+
+/* banner */
+.banner .container{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    background-color: #EEC373;
+    justify-content: space-around;
+    border-left: 3px solid #CA965C;
+    border-right: 3px solid #876445;
+    border-bottom: 3px solid #876445;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+#imgBanner{
+    width: 50%;
+    border: 3px solid #CA965C;
+    border-right: 3px solid #876445;
+    border-bottom: 3px solid #876445;   
+    border-radius: 30px;
+}
+#textoBanner{
+    width: 40%;
+    font-size: 30px;
+    font-weight: bolder;
+    color: beige;
+    background-color: #CA965C;
+    border-radius: 30px;
+    padding: 30px;
+    display: flex;  
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+#textoBanner button{
+    border: none;
+    background-color: #876445;
+    border-radius: 30px;
+    width: fit-content;
+    padding: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
+    color: white;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+/*especie*/
+.especies .container{
+    
+    display: flex;
+    flex-direction: column;
+
+}
+.linhaEspecie{
+    height:fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.caixaEspecie{
+    background-color: #EEC373;
+    margin: 10px;
+    
+    border: 3px solid #CA965C;
+    border-bottom: 3px solid #876445;
+    border-right: 3px solid #876445;
+    border-radius: 30px;
+    width: 26%;
+    height: 250px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.caixaEspecie img{
+    width: 90%;
+    border-radius: 100%;
+    margin: 5%;
+}
+.caixaEspecie div{
+    font-size: 20px;
+    font-weight: bolder;
+    color:#5f452f;
 }
 
 /* footer */
 .footer {
-    background-color: #f8df82;
+    background-color: #CA965C;
     height: 150px;
     color: #fff;
     display: flex;
     font-size: 15px;
-  }
+    border-top: 3px solid #876445;
+}
   
-  .footer .container {
+.footer .container {
     justify-content: center;
-  }
-  
+}
