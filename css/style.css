@@ -286,6 +286,7 @@ bicho
     padding-bottom: 25px;
     display: flex;
     width: fit-content;
+    margin-bottom: 25px;
     padding-left: 100px;
     padding-right: 100px;
     background-color: #EEC373;
@@ -308,6 +309,7 @@ bicho
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    border: 3px solid #876445;
 }
 #textoBanner button{
     border: none;
@@ -329,4 +331,24 @@ button {
 .clickable {
     cursor: pointer;
 }
+
+.donate .container{
+    margin-bottom: 20px;
+    flex-direction: column;
+    width: 40%;
+}
+.donate .container p{
+    font-size: 25px;
+    text-align: center;
+}
   
+.alinhamento{ 
+    width: 80% ; 
+    border-bottom: 2px solid #876445;
+}
+
+.alinhar{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
