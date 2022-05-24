@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa dos Roedores</title>
+    
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <img class="clickable" onclick="location.href='index.html'" src="images/logo.png" alt="logo" style="height: 120px">
+            <img class="clickable" onclick="location.href='login.html'" src="images/login.png" src="images/login.png" style="height: 100px">
+        </div>
+    </div>
+    <div class="login">
+        <div class="container">
+            <div class="card">
+                <h2>Olá de volta!</h2>
+                <div class="formulario">
+
+
+                    <span class="tipo_campo">E-mail:</span>
+                    <input id="email_input" type="text" placeholder="Login">
+
+                    <span class="tipo_campo">Senha:</span>
+                    <input id="senha_input" type="password" placeholder="******">
+
+                    <button class="btn" onclick="entrar()">Entrar</button>
+
+                    <h3>Não possui uma conta?</h3>
+                    <button class="btn" onclick="entrar()">Cadastre-se</button>
+
+                </div>
+
+                <div id="div_aguardar" class="loading-div">
+                    <img src="./assets/circle-loading.gif" id="loading-gif">
+                </div>
+
+                <div id="div_erros_login">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="container">
+            <div>
+                <ul class="footerBar">
+                    <li><a href="talk.html">Fale Conosco</a></li>
+                    <li><a href="support.html">Suporte</a></li>
+                    <li><a href="donate.html">Doações</a></li>
+                </ul>
+            </div>
+            <h4>Gabriel Vannucchi Corrêa <br> 
+                1CCO - SPTech &copy; 2022</h4>
+        </div>
+    </div>
+</body>
+</html>
