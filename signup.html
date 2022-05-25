@@ -18,9 +18,11 @@
     <div class="login">
         <div class="container">
             <div class="card">
-                <h2>Olá de volta!</h2>
+                <h2>Insira seus dados</h2>
                 <div class="formulario">
 
+                    <span class="tipo_campo">Nome:</span>
+                    <input id="nome_input" type="text" placeholder="Nome">
 
                     <span class="tipo_campo">E-mail:</span>
                     <input id="email_input" type="text" placeholder="Login">
@@ -28,12 +30,11 @@
                     <span class="tipo_campo">Senha:</span>
                     <input id="senha_input" type="password" placeholder="******">
 
-                    <button class="btn" onclick="entrar()">Entrar</button><br>
-                    <div class="alinhar">
-                        <div class="alinhamento"></div>
-                    </div>
-                    <h3>Não possui uma conta?</h3>
-                    <button class="btn" onclick="location.href='signup.html'">Cadastre-se</button>
+                    <span class="tipo_campo">Confirme sua senha:</span>
+                    <input id="confSenha_input" type="password" placeholder="******">
+
+                    <button class="btn" onclick="cadastrar()">Cadastrar</button>
+
 
                 </div>
 
