@@ -104,7 +104,7 @@ body{
     align-items: center;
 }
 .caixaEspecie img{
-    width: 90%;
+    width: 75%;
     border-radius: 100%;
     margin: 5%;
     border: 3px solid #CA965C;
@@ -112,7 +112,7 @@ body{
     border-right: 3px solid #876445;
 }
 .caixaEspecie div{
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bolder;
     color:#5f452f;
 }
@@ -202,7 +202,7 @@ bicho
     align-items: center;
 }
 .caixaCuidado img{
-    width: 80%;
+    width: 75%;
     border-radius: 100%;
     margin: 5%;
     border: 3px solid #CA965C;
@@ -210,7 +210,7 @@ bicho
     border-right: 3px solid #876445;
 }
 .caixaCuidado div{
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bolder;
     color:#5f452f;
 }
