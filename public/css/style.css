@@ -65,9 +65,9 @@ body{
     border-radius: 30px;
     width: fit-content;
     padding: 5px;
-    padding-right: 15px;
-    padding-left: 15px;
-    color: white;
+    padding-right: 25px;
+    padding-left: 25px;
+    color: beige;
     font-weight: bolder;
     font-size: 20px;
 }
@@ -85,6 +85,13 @@ body{
     display: flex;
     justify-content: space-evenly;
 }
+
+.caixaEspecie:hover{
+    -ms-transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+}
+
 .caixaEspecie{
     
     cursor: pointer;
@@ -184,6 +191,12 @@ bicho
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+}
+.caixaCuidado:hover{
+    
+    -ms-transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
 }
 .caixaCuidado{
     background-color: #EEC373;
@@ -299,7 +312,7 @@ bicho
 }
 #textoBanner{
     width: 40%;
-    font-size: 30px;
+    font-size: 42px;
     font-weight: bolder;
     color: beige;
     background-color: #CA965C;
@@ -321,7 +334,7 @@ bicho
     padding-left: 15px;
     color: white;
     font-weight: bolder;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 button {
@@ -351,4 +364,45 @@ button {
     display:flex;
     justify-content: center;
     align-items: center;
+}
+/* informações */
+.info .container{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    background-color: #EEC373;
+    justify-content: space-around;
+    border-left: 3px solid #CA965C;
+    border-right: 3px solid #876445;
+    border-bottom: 3px solid #876445;
+    border-radius: 30px;
+}
+.info .container .texto{
+    font-size: 18px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.imgInfo{
+    height: 200px;
+    border: 3px solid #CA965C;
+    border-right: 3px solid #876445;
+    border-bottom: 3px solid #876445;   
+    border-radius: 30px;
+}
+.info .container{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    color: #876445;
+    font-weight: bolder;
+    align-items: center;
+    font-size: 40px;
+    background-color: #EEC373;
+    justify-content: space-around;
+    border-left: 3px solid #CA965C;
+    border-right: 3px solid #876445;
+    border-bottom: 3px solid #876445;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
