@@ -199,6 +199,7 @@ bicho
     transform: scale(1.15);
 }
 .caixaCuidado{
+    cursor: pointer;
     background-color: #EEC373;
     margin: 10px;
     
@@ -377,7 +378,7 @@ button {
     border-bottom: 3px solid #876445;
     border-radius: 30px;
 }
-.info .container .texto{
+.container .texto{
     font-size: 18px;
     padding-left: 50px;
     padding-right: 50px;
@@ -393,16 +394,25 @@ button {
 .info .container{
     padding-top: 25px;
     padding-bottom: 25px;
-    display: flex;
     color: #876445;
+    display: flex;
     font-weight: bolder;
     align-items: center;
     font-size: 40px;
     background-color: #EEC373;
     justify-content: space-around;
+    border-top: 3px solid #CA965C;
     border-left: 3px solid #CA965C;
     border-right: 3px solid #876445;
     border-bottom: 3px solid #876445;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
+}
+
+/* banner outras pags */
+.fly{
+    margin-bottom: 20px;
+}
+.flytop{
+    margin-top: 20px;
 }
