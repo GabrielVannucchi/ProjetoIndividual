@@ -9,7 +9,6 @@
     <title>AcquaTec | Dashboards</title>
 
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="dashboards.css">
     <script src="../js/funcoes.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -25,70 +24,92 @@
 <body onload="validarSessao(), atualizarFeed()">
     <!-- <body onload="validarSessao()"> -->
 
-    <div class="janela">
-        <div class="header-left">
-            <h1>AcquaTec</h1>
-
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            <div class="header">
+                <div class="container">
+                    <img class="clickable" onclick="location.href='../index.html'" src="../images/logo.png" alt="logo" style="height: 120px">
+                    <img class="clickable" onclick="location.href='../login.html'" src="../images/login.png" src="images/login.png" style="height: 100px">
+                </div>
             </div>
+            <div class="login">
+                <div class="alerta_erro">
+                    <div class="card_erro" id="cardErro">
+                        <span id="mensagem_erro"></span>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="card">
+                        
+                        <div class="hello">
+                            <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+                        </div>
+                        <img style="width: 250px; height: 250px; border-radius: 25px; border: 3px solid #CA965C; border-bottom: 3px solid #876445; border-right: 3px solid #876445;" id="fotoPerfil">
+                        <div class="formulario">
+                            <button id="btAlterar" class="btn" onclick="alterarFoto()">Alterar Foto de Perfil</button>
+                            <div id="divAltFoto" style="display: none; align-items: center; flex-direction: column;">
+                                Insira o endereço da foto escolhida: <br>
+                                <input onkeyup="fotoPerfil.src = inpFoto.value" id="inpFoto" style="width: 200px" type="text" placeholder="Dê preferencia a fotos quadradas">
+                                <button class="btn" onclick="atualizarFoto()">Atualizar</button>
+                            </div>
+                        </div>
 
-            <div class="btn-nav-white">
-                <a href="./cards.html">
-                    <h3>Aquários</h3>
-                </a>
+                        <div class="btn-logout" onclick="limparSessao()">
+                            <h3>Sair</h3>
+                        </div>
+                        
+                        <button onclick="limparSessao()"></button>
+                        <h2>Insira seus dados</h2>
+                        <div class="formulario">
+        
+                            <span class="tipo_campo">Nome:</span>
+                            <input id="nome_input" type="text" placeholder="Nome">
+                            
+                            <button class="btn" onclick="cadastrar()">Cadastrar</button>
+        
+        
+                        </div>
+        
+                        <div id="div_aguardar" class="loading-div">
+                            <img src="./assets/circle-loading.gif" id="loading-gif">
+                        </div>
+        
+                        <div id="div_erros_login">
+        
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="btn-nav">
-
-                <h3>Gráficos</h3>
-
+            
+    <div class="footer">
+        <div class="container">
+            <div>
+                <ul class="footerBar">
+                    <li><a href="thanks.html">Agradecimentos</a></li>
+                    <li><a href="support.html">Suporte</a></li>
+                    <li><a href="donate.html">Doações</a></li>
+                </ul>
             </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
-        </div>
-
-        <div class="dash">
-            <div class="btns-dash">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
-                <button class="btn-chart" onclick="obterDadosGrafico(1)">Aquario 1</button>
-                <button class="btn-chart" onclick="obterDadosGrafico(2)">Aquario 2</button>
-                <button class="btn-chart" onclick="obterDadosGrafico(3)">Aquario 3</button>
-                <button class="btn-chart" onclick="obterDadosGrafico(4)">Aquario 4</button>
-            </div>
-            <div class="graph">
-                <canvas id="canvas_grafico"></canvas>
-            </div>
+            <h4>Gabriel Vannucchi Corrêa <br> 
+                1CCO - SPTech &copy; 2022</h4>
         </div>
     </div>
-
 
 </body>
 
 </html>
 
 <script>
-
     let proximaAtualizacao;
 
-    window.onload = obterDadosGrafico(1);
+    window.onload = obterDados(1);
 
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    atualizarDados()
+    function atualizarDados(){
+        
+        b_usuario.innerHTML = `${sessionStorage.NOME_USUARIO}, ${sessionStorage.ID_USUARIO}, ${sessionStorage.EMAIL_USUARIO}`;
+        fotoPerfil.src = sessionStorage.PERFIL_USUARIO;
 
-    //verificar_autenticacao();
-
-    // altere aqui como os dados serão exibidos
-    // e como são recuperados do BackEnd
-    function obterDadosGrafico(idAquario) {
+    }
+    function obterDados(idAquario) {
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
         }
@@ -99,7 +120,6 @@
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    plotarGrafico(resposta, idAquario);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -110,130 +130,51 @@
             });
 
     }
-
-    // só altere aqui se souber o que está fazendo!
-    function plotarGrafico(resposta, idAquario) {
-        console.log('iniciando plotagem do gráfico...');
-
-        var dados = {
-            labels: [],
-            datasets: [
-                {
-                    yAxisID: 'y-umidade',
-                    label: 'Umidade',
-                    borderColor: '#32B9CD',
-                    backgroundColor: '#32b9cd8f',
-                    fill: true,
-                    data: []
+    function alterarFoto() {
+        btAlterar.style.display = "none";
+        divAltFoto.style.display = "flex";
+    }
+    function atualizarFoto(){
+        aguardar();
+        var fotoVar = inpFoto.value;
+        var idVar = sessionStorage.ID_USUARIO;
+        if(fotoVar == ""){
+            alert("Insira uma foto!");
+        }else{
+            fetch("/../usuarios/cadastrarFoto", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
                 },
-                {
-                    yAxisID: 'y-temperatura',
-                    label: 'Temperatura',
-                    borderColor: '#FFF',
-                    backgroundColor: '#32b9cd8f',
-                    fill: true,
-                    data: []
-                }
-            ]
-        };
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    fotoServer: fotoVar,
+                    idServer: idVar
+                })
+            }).then(function (resposta) {
 
-        for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            dados.labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.umidade);
-            dados.datasets[1].data.push(registro.temperatura);
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    //cardErro.style.display = "block"
+                    //
+                    alert("Alteração realizada com sucesso!");
+                    btAlterar.style.display = "block";
+                    divAltFoto.style.display = "none";
+                    
+                    sessionStorage.PERFIL_USUARIO = fotoVar;
+                    atualizarDados();
+                    //
+                    //limparFormulario();
+                    finalizarAguardar();
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!" + resposta);
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
         }
-
-        console.log(JSON.stringify(dados));
-
-        var ctx = canvas_grafico.getContext('2d');
-        window.grafico_linha = Chart.Line(ctx, {
-            data: dados,
-            //Configurações do gráfico
-            options: {
-                responsive: true,
-                animation: { duration: 500 },
-                hoverMode: 'index',
-                stacked: false,
-                title: {
-                    display: true,
-                    text: 'Histórico recente de umidade/temperatura'
-                },
-                scales: {
-                    yAxes: [{
-                        type: 'linear',
-                        display: true,
-                        position: 'left',
-                        id: 'y-temperatura',
-                        ticks: {
-                            beginAtZero: true,
-                            max: 100,
-                            min: 0
-                        }
-                    }, {
-                        type: 'linear',
-                        display: false,
-                        position: 'right',
-                        id: 'y-umidade',
-                        ticks: {
-                            beginAtZero: true,
-                            max: 100,
-                            min: 0
-                        },
-
-                        gridLines: {
-                            drawOnChartArea: false,
-                        },
-                    }],
-                }
-            }
-        });
-
-        function sendData() {
-			var http = new XMLHttpRequest();
-			http.open('POST', 'http://localhost:3000/api/sendData', false);
-			http.send(null);
-		}
-
-        setInterval(() => {
-			sendData();
-		}, 2000);
-
-        //Atualiza os dados de 5 em 5 segundos
-        setTimeout(() => atualizarGrafico(idAquario, dados), 2000);
-    }
-
-    // só mexer se quiser alterar o tempo de atualização
-    // ou se souber o que está fazendo!
-    function atualizarGrafico(idAquario, dados) {
-
-        fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
-
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico: ${dados}`);
-
-                    // tirando e colocando valores no gráfico
-                    dados.labels.shift(); // apagar o primeiro
-                    dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                    dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
-                    dados.datasets[1].data.shift();  // apagar o primeiro de umidade
-                    dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de umidade
-
-                    window.grafico_linha.update();
-
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados), 2000);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados), 2000);
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
     }
 </script>
