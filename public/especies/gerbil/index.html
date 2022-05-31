@@ -8,12 +8,19 @@
     
     <link rel="icon" href="../../assets/icon/favicon.ico">
     <link rel="stylesheet" href="../../css/style.css">
+    <script src="../.././js/funcoes.js"></script>
 </head>
 <body>
     <div class="header">
         <div class="container">
             <img class="clickable" onclick="location.href='../../index.html'" src="../../images/logo.png" alt="logo" style="height: 120px">
-            <img class="clickable" onclick="location.href='../../login.html'" src="../../images/login.png" style="height: 100px">
+            <div>
+                
+                <div id="headerComLogin" class="hello">
+                   <span id="b_usuario">usuário</span>
+                </div>
+                <img id="headerSemLogin" class="clickable" onclick="location.href='../../login.html'" src="../../images/login.png" style="height: 100px; display: none;">
+            </div>
         </div>
     </div>
     <div class="bicho">
@@ -76,3 +83,58 @@
     </div>
 </body>
 </html>
+<script>
+    
+    let proximaAtualizacao;
+
+    window.onload = obterDados(1);
+
+    if(sessionStorage.ID_USUARIO != undefined){
+        b_usuario.innerHTML =  
+        `<div style="display:flex">
+            <div style="display:flex; flex-direction: column; justify-content: space-evenly; align-items: center;">
+                <span class="textoPerfil">Olá, ${sessionStorage.NOME_USUARIO}!</span>
+                <div style="display: flex">
+                    <button class="buttonPerfil" onclick="location.href='../../dashboard/dashboard.html'">Seu Perfil</button>
+                    <button class="buttonPerfil" onclick="limparSessao2()">Sair</button>
+                </div>
+            </div>
+            <img class="imgPerfil clickable" onclick="location.href='../../dashboard/dashboard.html'" src="${sessionStorage.PERFIL_USUARIO}">
+        </div>`;
+        headerComLogin.style.display = "block";
+        headerSemLogin.style.display = "none";
+        
+    }else{
+        headerComLogin.style.display = "none";
+        headerSemLogin.style.display = "block";
+
+    }
+    
+    //b_usuario.innerHTML = `${sessionStorage.NOME_USUARIO}, ${sessionStorage.ID_USUARIO}, ${sessionStorage.EMAIL_USUARIO}`;
+
+    function obterDados(idAquario) {
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+    
+    // só mexer se quiser alterar o tempo de atualização
+    // ou se souber o que está fazendo!
+    
+</script>
