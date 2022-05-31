@@ -27,7 +27,7 @@
             <div class="header">
                 <div class="container">
                     <img class="clickable" onclick="location.href='../index.html'" src="../images/logo.png" alt="logo" style="height: 120px">
-                    <img class="clickable" onclick="location.href='../login.html'" src="../images/login.png" src="images/login.png" style="height: 100px">
+                    <div></div>
                 </div>
             </div>
             <div class="login">
@@ -37,36 +37,36 @@
                     </div>
                 </div>
                 <div class="container">
-                    <div class="card">
+                    <div class="card" style="display: flex; align-items: center; flex-direction: column;">
                         
                         <div class="hello">
                             <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
                         </div>
                         <img style="width: 250px; height: 250px; border-radius: 25px; border: 3px solid #CA965C; border-bottom: 3px solid #876445; border-right: 3px solid #876445;" id="fotoPerfil">
                         <div class="formulario">
-                            <button id="btAlterar" class="btn" onclick="alterarFoto()">Alterar Foto de Perfil</button>
+                            <button id="btAlterarFoto" class="btn" onclick="alterarFoto()">Alterar Foto de Perfil</button>
                             <div id="divAltFoto" style="display: none; align-items: center; flex-direction: column;">
-                                Insira o endereço da foto escolhida: <br>
+                                <span style="font-weight: bold; font-size: 18px"><br>Insira o endereço da foto escolhida:</span> <br>
                                 <input onkeyup="fotoPerfil.src = inpFoto.value" id="inpFoto" style="width: 200px" type="text" placeholder="Dê preferencia a fotos quadradas">
                                 <button class="btn" onclick="atualizarFoto()">Atualizar</button>
                             </div>
+                            <button id="btAlterarNome" class="btn" onclick="alterarNome()">Alterar Nome</button>
+                            <input id="inpNome" style="margin-top: 10px; width: 200px; display: none" type="text" placeholder="Seu nome">
+                            <button id="btConfirmarNome" style="margin-top: 10px; display: none;" class="btn" onclick="">Confirmar novo nome</button>
+                            <button id="btAlterarSenha" class="btn" onclick="alterarSenha()">Alterar Senha</button>
+                            <span id="spDados" style="display: none;">
+                                <br>
+                                <input id="inpSenhaAtual" style="width: 200px" type="password" placeholder="Sua senha atual"><br>
+                                <input id="inpNovaSenha" style="width: 200px" type="password" placeholder="Sua nova senha"><br>
+                                <input id="inpNovaSenhaConf" style="width: 200px" type="password" placeholder="Confirme sua nova senha"><br>
+                                <button id="btConfirmarSenha" class="btn" onclick="">Confirmar nova senha</button>
+                            </span>
+
+                            
                         </div>
 
-                        <div class="btn-logout" onclick="limparSessao()">
-                            <h3>Sair</h3>
-                        </div>
+
                         
-                        <button onclick="limparSessao()"></button>
-                        <h2>Insira seus dados</h2>
-                        <div class="formulario">
-        
-                            <span class="tipo_campo">Nome:</span>
-                            <input id="nome_input" type="text" placeholder="Nome">
-                            
-                            <button class="btn" onclick="cadastrar()">Cadastrar</button>
-        
-        
-                        </div>
         
                         <div id="div_aguardar" class="loading-div">
                             <img src="./assets/circle-loading.gif" id="loading-gif">
@@ -105,7 +105,8 @@
     atualizarDados()
     function atualizarDados(){
         
-        b_usuario.innerHTML = `${sessionStorage.NOME_USUARIO}, ${sessionStorage.ID_USUARIO}, ${sessionStorage.EMAIL_USUARIO}`;
+        b_usuario.innerHTML = `${sessionStorage.NOME_USUARIO}`;
+        // ${sessionStorage.ID_USUARIO}, ${sessionStorage.EMAIL_USUARIO}
         fotoPerfil.src = sessionStorage.PERFIL_USUARIO;
 
     }
@@ -131,10 +132,11 @@
 
     }
     function alterarFoto() {
-        btAlterar.style.display = "none";
+        btAlterarFoto.style.display = "none";
         divAltFoto.style.display = "flex";
     }
     function atualizarFoto(){
+
         aguardar();
         var fotoVar = inpFoto.value;
         var idVar = sessionStorage.ID_USUARIO;
@@ -160,7 +162,7 @@
                     //cardErro.style.display = "block"
                     //
                     alert("Alteração realizada com sucesso!");
-                    btAlterar.style.display = "block";
+                    btAlterarFoto.style.display = "block";
                     divAltFoto.style.display = "none";
                     
                     sessionStorage.PERFIL_USUARIO = fotoVar;
@@ -177,4 +179,16 @@
             });
         }
     }
+    
+    function alterarNome() {
+        inpNome.style.display = "block";
+        btConfirmarNome.style.display = "block";
+        btAlterarNome.style.display = "none";
+    }
+
+    function alterarSenha() {
+        spDados.style.display = "block";
+        btAlterarSenha.style.display = "none";
+    }  
+
 </script>
