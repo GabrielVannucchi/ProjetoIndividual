@@ -20,6 +20,14 @@ router.post("/cadastrarFoto", function (req, res) {
     usuarioController.cadastrarFoto(req, res);
 })
 
+router.post("/cadastrarSenha", function (req, res) {
+    usuarioController.cadastrarSenha(req, res);
+})
+
+router.post("/cadastrarNome", function (req, res) {
+    usuarioController.cadastrarNome(req, res);
+})
+
 router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
 });

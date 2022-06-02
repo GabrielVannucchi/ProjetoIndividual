@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AcquaTec | Dashboards</title>
+    <title>Area Logada</title>
 
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/funcoes.js"></script>
@@ -24,61 +24,70 @@
 <body onload="validarSessao(), atualizarFeed()">
     <!-- <body onload="validarSessao()"> -->
 
-            <div class="header">
-                <div class="container">
-                    <img class="clickable" onclick="location.href='../index.html'" src="../images/logo.png" alt="logo" style="height: 120px">
-                    <div></div>
-                </div>
+    <div class="header">
+        <div class="container">
+            <img class="clickable" onclick="location.href='../index.html'" src="../images/logo.png" alt="logo"
+                style="height: 120px">
+            <div></div>
+        </div>
+    </div>
+    <div class="login">
+        <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
             </div>
-            <div class="login">
-                <div class="alerta_erro">
-                    <div class="card_erro" id="cardErro">
-                        <span id="mensagem_erro"></span>
-                    </div>
+        </div>
+        <div class="container">
+            <div class="card" style="display: flex; align-items: center; flex-direction: column;">
+
+                <div class="hello">
+                    <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
                 </div>
-                <div class="container">
-                    <div class="card" style="display: flex; align-items: center; flex-direction: column;">
-                        
-                        <div class="hello">
-                            <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-                        </div>
-                        <img style="width: 250px; height: 250px; border-radius: 25px; border: 3px solid #CA965C; border-bottom: 3px solid #876445; border-right: 3px solid #876445;" id="fotoPerfil">
-                        <div class="formulario">
-                            <button id="btAlterarFoto" class="btn" onclick="alterarFoto()">Alterar Foto de Perfil</button>
-                            <div id="divAltFoto" style="display: none; align-items: center; flex-direction: column;">
-                                <span style="font-weight: bold; font-size: 18px"><br>Insira o endereço da foto escolhida:</span> <br>
-                                <input onkeyup="fotoPerfil.src = inpFoto.value" id="inpFoto" style="width: 200px" type="text" placeholder="Dê preferencia a fotos quadradas">
-                                <button class="btn" onclick="atualizarFoto()">Atualizar</button>
-                            </div>
-                            <button id="btAlterarNome" class="btn" onclick="alterarNome()">Alterar Nome</button>
-                            <input id="inpNome" style="margin-top: 10px; width: 200px; display: none" type="text" placeholder="Seu nome">
-                            <button id="btConfirmarNome" style="margin-top: 10px; display: none;" class="btn" onclick="">Confirmar novo nome</button>
-                            <button id="btAlterarSenha" class="btn" onclick="alterarSenha()">Alterar Senha</button>
-                            <span id="spDados" style="display: none;">
-                                <br>
-                                <input id="inpSenhaAtual" style="width: 200px" type="password" placeholder="Sua senha atual"><br>
-                                <input id="inpNovaSenha" style="width: 200px" type="password" placeholder="Sua nova senha"><br>
-                                <input id="inpNovaSenhaConf" style="width: 200px" type="password" placeholder="Confirme sua nova senha"><br>
-                                <button id="btConfirmarSenha" class="btn" onclick="limparSessao()">Confirmar nova senha</button>
-                            </span>
-                            <button class="btn" onclick="limparSessao()">Sair</button>
-                            
-                        </div>
+                <img style="width: 250px; height: 250px; border-radius: 25px; border: 3px solid #CA965C; border-bottom: 3px solid #876445; border-right: 3px solid #876445;"
+                    id="fotoPerfil">
+                <div class="formulario">
+                    <button id="btAlterarFoto" class="btn" onclick="alterarFoto()">Alterar Foto de Perfil</button>
+                    <div id="divAltFoto" style="display: none; align-items: center; flex-direction: column;">
+                        <span style="font-weight: bold; font-size: 18px"><br>Insira o endereço da foto escolhida:</span>
+                        <br>
+                        <input onkeyup="fotoPerfil.src = inpFoto.value" id="inpFoto" style="width: 200px" type="text"
+                            placeholder="Dê preferencia a fotos quadradas">
+                        <button class="btn" onclick="atualizarFoto()">Atualizar</button>
+                    </div>
+                    <button id="btAlterarNome" class="btn" onclick="alterarNome()">Alterar Nome</button>
+                    <input id="inpNome" style="margin-top: 10px; width: 200px; display: none" type="text"
+                        placeholder="Seu nome">
+                    <button id="btConfirmarNome" style="margin-top: 10px; display: none;" class="btn"
+                        onclick="atualizarNome()">Confirmar novo nome</button>
+                    <button id="btAlterarSenha" class="btn" onclick="alterarSenha()">Alterar Senha</button>
+                    <span id="spDados" style="display: none;">
+                        <br>
+                        <input id="inpSenhaAtual" style="width: 200px" type="password"
+                            placeholder="Sua senha atual"><br>
+                        <input id="inpNovaSenha" style="width: 200px" type="password" placeholder="Sua nova senha"><br>
+                        <input id="inpNovaSenhaConf" style="width: 200px" type="password"
+                            placeholder="Confirme sua nova senha"><br>
+                        <button id="btConfirmarSenha" class="btn" onclick="atualizarSenha()">Confirmar nova
+                            senha</button>
+                    </span>
+                    <button class="btn" onclick="limparSessao()">Sair da conta</button>
+
+                </div>
 
 
-                        
-        
-                        <div id="div_aguardar" class="loading-div">
-                            <img src="./assets/circle-loading.gif" id="loading-gif">
-                        </div>
-        
-                        <div id="div_erros_login">
-        
-                        </div>
-                    </div>
+
+
+                <div id="div_aguardar" class="loading-div">
+                    <img src="./assets/circle-loading.gif" id="loading-gif">
+                </div>
+
+                <div id="div_erros_login">
+
                 </div>
             </div>
-            
+        </div>
+    </div>
+
     <div class="footer">
         <div class="container">
             <div>
@@ -88,7 +97,7 @@
                     <li><a href="donate.html">Doações</a></li>
                 </ul>
             </div>
-            <h4>Gabriel Vannucchi Corrêa <br> 
+            <h4>Gabriel Vannucchi Corrêa <br>
                 1CCO - SPTech &copy; 2022</h4>
         </div>
     </div>
@@ -103,8 +112,8 @@
     window.onload = obterDados(1);
 
     atualizarDados()
-    function atualizarDados(){
-        
+    function atualizarDados() {
+
         b_usuario.innerHTML = `${sessionStorage.NOME_USUARIO}`;
         // ${sessionStorage.ID_USUARIO}, ${sessionStorage.EMAIL_USUARIO}
         fotoPerfil.src = sessionStorage.PERFIL_USUARIO;
@@ -135,14 +144,14 @@
         btAlterarFoto.style.display = "none";
         divAltFoto.style.display = "flex";
     }
-    function atualizarFoto(){
+    function atualizarFoto() {
 
         aguardar();
         var fotoVar = inpFoto.value;
         var idVar = sessionStorage.ID_USUARIO;
-        if(fotoVar == ""){
+        if (fotoVar == "") {
             alert("Insira uma foto!");
-        }else{
+        } else {
             fetch("/../usuarios/cadastrarFoto", {
                 method: "POST",
                 headers: {
@@ -164,7 +173,7 @@
                     alert("Alteração realizada com sucesso!");
                     btAlterarFoto.style.display = "block";
                     divAltFoto.style.display = "none";
-                    
+
                     sessionStorage.PERFIL_USUARIO = fotoVar;
                     atualizarDados();
                     //
@@ -179,16 +188,121 @@
             });
         }
     }
-    
-    function alterarNome() {
-        inpNome.style.display = "block";
-        btConfirmarNome.style.display = "block";
-        btAlterarNome.style.display = "none";
-    }
 
     function alterarSenha() {
         spDados.style.display = "block";
         btAlterarSenha.style.display = "none";
-    }  
+
+    }
+    function atualizarSenha() {
+        if (inpSenhaAtual.value == sessionStorage.SENHA_USUARIO) {
+            if (inpNovaSenha.value == inpNovaSenhaConf.value) {
+                if (inpNovaSenha.value != sessionStorage.SENHA_USUARIO) {
+                    if (inpNovaSenha.value.length != '') {
+                        var senhaVar = inpNovaSenha.value;
+                        var idVar = sessionStorage.ID_USUARIO;
+                        fetch("/../usuarios/cadastrarSenha", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                // crie um atributo que recebe o valor recuperado aqui
+                                // Agora vá para o arquivo routes/usuario.js
+                                senhaServer: senhaVar,
+                                idServer: idVar
+                            })
+                        }).then(function (resposta) {
+
+                            console.log("resposta: ", resposta);
+
+                            if (resposta.ok) {
+                                //cardErro.style.display = "block"
+                                //
+                                alert("Alteração realizada com sucesso!");
+
+                                spDados.style.display = "none";
+                                btAlterarSenha.style.display = "block";
+                                inpSenhaAtual.value = '';
+                                inpNovaSenha.value = '';
+                                inpNovaSenhaConf.value = '';
+                                sessionStorage.SENHA_USUARIO = senhaVar;
+                                atualizarDados();
+                                //
+                                //limparFormulario();
+                                finalizarAguardar();
+                            } else {
+                                throw ("Houve um erro ao tentar realizar o cadastro!" + resposta);
+                            }
+                        }).catch(function (resposta) {
+                            console.log(`#ERRO: ${resposta}`);
+                            finalizarAguardar();
+                        });
+                    } else {
+                        alert('Digite uma senha!');
+                    }
+                } else {
+                    alert('Sua nova senha deve ser diferente da atual!');
+                }
+            } else {
+                alert('A confirmação de nova senha não confere!');
+            }
+        } else {
+            alert('Senha atual não confere!');
+        }
+    }
+
+
+    function alterarNome() {
+        inpNome.style.display = "block";
+        btConfirmarNome.style.display = "block";
+        btAlterarNome.style.display = "none";
+
+    }
+
+    function atualizarNome() {
+        if (inpNome.value != '') {
+            var nomeVar = inpNome.value;
+            var idVar = sessionStorage.ID_USUARIO;
+            fetch("/../usuarios/cadastrarNome", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nomeVar,
+                    idServer: idVar
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    //cardErro.style.display = "block"
+                    //
+                    alert("Alteração realizada com sucesso!");
+
+                    inpNome.style.display = "none";
+                    btConfirmarNome.style.display = "none";
+                    btAlterarNome.style.display = "block";
+                    inpNome.value = '';
+                    sessionStorage.NOME_USUARIO = nomeVar;
+                    atualizarDados();
+                    //
+                    //limparFormulario();
+                    finalizarAguardar();
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!" + resposta);
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+        } else {
+            alert('Digite um nome!');
+        }
+    }
 
 </script>
