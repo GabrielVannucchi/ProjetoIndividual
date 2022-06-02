@@ -28,6 +28,10 @@ router.post("/cadastrarNome", function (req, res) {
     usuarioController.cadastrarNome(req, res);
 })
 
+router.post("/cadastrarPostagem", function (req, res) {
+    usuarioController.cadastrarPostagem(req, res);
+})
+
 router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
 });

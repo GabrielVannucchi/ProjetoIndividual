@@ -97,6 +97,7 @@ function cadastrar(req, res) {
 }
 
 
+
 function cadastrarFoto(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var foto = req.body.fotoServer;
@@ -190,12 +191,55 @@ function cadastrarNome(req, res) {
     }
 }
 
+
+function cadastrarPostagem(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var id = req.body.idServer;
+    var foto = req.body.fotoServer;
+    var titulo = req.body.tituloServer;
+    var texto = req.body.textoServer;
+    var especie = req.body.especieServer;
+
+
+    // Faça as validações dos valores
+    if (id == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else if (foto == undefined) {
+        res.status(400).send("Sua foto está undefined!");
+    } else if (titulo == undefined) {
+        res.status(400).send("Seu titulo está undefined!");
+    } else if (texto == undefined) {
+        res.status(400).send("Seu texto está undefined!");
+    } else if (especie == undefined) {
+        res.status(400).send("Sua especie está undefined!");
+    } else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrarPostagem(id, foto, titulo, texto, especie)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     entrar,
     cadastrar,
     cadastrarFoto,
     cadastrarSenha,
     cadastrarNome,
+    cadastrarPostagem,
     listar,
     testar
 }
