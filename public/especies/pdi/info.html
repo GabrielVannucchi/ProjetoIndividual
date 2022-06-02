@@ -113,8 +113,6 @@
     
     let proximaAtualizacao;
 
-    window.onload = obterDados(1);
-
     if(sessionStorage.ID_USUARIO != undefined){
         b_usuario.innerHTML =  
         `<div style="display:flex">
@@ -138,29 +136,4 @@
     
     //b_usuario.innerHTML = `${sessionStorage.NOME_USUARIO}, ${sessionStorage.ID_USUARIO}, ${sessionStorage.EMAIL_USUARIO}`;
 
-    function obterDados(idAquario) {
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
-
-        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-    }
-    
-    // só mexer se quiser alterar o tempo de atualização
-    // ou se souber o que está fazendo!
-    
 </script>
