@@ -67,13 +67,22 @@ function cadastrarNome(nome, id) {
     return database.executar(instrucao);
 }
 
-function cadastrarPostagem(id, foto, titulo, texto, especie) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", id, foto, titulo, texto, especie);
+function cadastrarPostagem(id, foto, titulo, texto, especie, idPostagem) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", id, foto, titulo, texto, especie, idPostagem);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        insert into postagem values (1,${id},'${foto}', '${titulo}','${texto}', '${especie}',now());
+        insert into postagem values (${idPostagem},${id},'${foto}', '${titulo}','${texto}', '${especie}',now());
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function buscarNumero(id) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", id)
+    var instrucao = `
+        select count(fkUsuario) as qtdPostagem from postagem where fkUsuario = ${id};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -86,5 +95,6 @@ module.exports = {
     cadastrarSenha,
     cadastrarNome,
     cadastrarPostagem,
+    buscarNumero,
     listar,
 };

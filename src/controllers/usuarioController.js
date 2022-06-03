@@ -199,8 +199,9 @@ function cadastrarPostagem(req, res) {
     var titulo = req.body.tituloServer;
     var texto = req.body.textoServer;
     var especie = req.body.especieServer;
+    var idPostagem = req.body.idPostagemServer;
 
-
+    console.log(`AAAAAA ${id},${foto},${foto},${titulo},${texto},${especie},${idPostagem}`);
     // Faça as validações dos valores
     if (id == undefined) {
         res.status(400).send("Seu id está undefined!");
@@ -212,14 +213,48 @@ function cadastrarPostagem(req, res) {
         res.status(400).send("Seu texto está undefined!");
     } else if (especie == undefined) {
         res.status(400).send("Sua especie está undefined!");
+    } else if (idPostagem == undefined) {
+        res.status(400).send("Seu id da postagem está undefined!");
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarPostagem(id, foto, titulo, texto, especie)
+        usuarioModel.cadastrarPostagem(id, foto, titulo, texto, especie, idPostagem)
             .then(
                 function (resultado) {
                     res.json(resultado);
                 }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+
+function buscarNumero(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var id = req.body.idServer;
+    // Faça as validações dos valores
+    if (id == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.buscarNumero(id)
+            .then(
+                function (resultado) {
+                    console.log(`Resultados: ${JSON.stringify(resultado[0].idPostagem)}`); // transforma JSON em String
+
+                    console.log(resultado);
+                    res.json(resultado[0]);
+                }
+                
             ).catch(
                 function (erro) {
                     console.log(erro);
@@ -240,6 +275,7 @@ module.exports = {
     cadastrarSenha,
     cadastrarNome,
     cadastrarPostagem,
+    buscarNumero,
     listar,
     testar
 }
