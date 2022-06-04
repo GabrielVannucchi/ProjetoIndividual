@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa dos Roedores</title>
+    
+    <link rel="icon" href="../../assets/icon/favicon.ico">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../.././js/funcoes.js"></script>
+</head>
+<style>
+    h3{
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="header">
+        <div class="container">
+            <img class="clickable" onclick="location.href='../../index.html'" src="../../images/logo.png" alt="logo" style="height: 120px">
+            <div>
+                
+                <div id="headerComLogin" class="hello">
+                   <span id="b_usuario">usuário</span>
+                </div>
+                <img id="headerSemLogin" class="clickable" onclick="location.href='../../login.html'" src="../../images/login.png" style="height: 100px; display: none;">
+            </div>
+        </div>
+    </div>
+    <div class="info fly flytop">
+        <div class="container">         
+            <div>
+                <img class="clickable" onclick="location.href='./index.html'" src="../../images/back.png">
+            </div>
+            <div class="bichoTitulo">
+                Cuidados
+                
+            </div>
+            <div style="width: 62px;"></div>
+        </div>
+    </div>
+    <div class="info fly ">
+        <div class="container">
+            <div class="texto">
+                <div style="display: flex">
+                    <img src="images/house.png" height="300px">
+                    <div>
+                        <h3>Alojamento</h3>
+                        <p>&nbsp&nbsp&nbsp&nbsp&nbsp <u>Jamais crie o seu porquinho da índia em uma gaiola</u>! Ela causa claustrofobia em seu porquinho, eles podem roer as grades e acabarem com ferimentos sérios, além de as grades machucarem as patinhas causando feridas dolorosas que podem levar a amputação.</p>
+                        <p>&nbsp&nbsp&nbsp&nbsp&nbsp Como alternativa você pode montar um cercadinho de 50cm de altura, porquinhos da índia raramente pulam uma altura maior do que essa. A area minima para o cercado é de 0,8m² por animal, porém lembre sempre que quanto mais espaço, mais qualidade de vida ele terá.</p>
+                        <p></p>
+                        
+                    </div>
+                </div>
+                <div style="display: flex">
+                    <div>
+                        <p>&nbsp&nbsp&nbsp&nbsp&nbsp O cercado deve possuir um local especifico para se fazer as necessidade fisiológicas, onde eles aprendem a fazer somente alí, um pote para a ração, pote de agua ou bebedouro, uma toca, para eles dormirem e um porta feno. Não coloque rodinhas de exercicio, normalmente elas são pequenas e causam problemas na coluna.</p>
+                        <p>&nbsp&nbsp&nbsp&nbsp&nbsp A forração pode ser feita com pano soft ou semelhante, jamais use serragem, elas podem machucar as patinhas além de liberar pó que pode causar problemas respiratórios. Para a lavagem dos panos não utilize amaciante, o olfato do porquinho é muito sensível.</p>
+                        
+                    </div>
+                    <img src="images/cercado.png" height="200px">
+                    
+                </div>
+                <br>
+                <div class="alinhar">
+                    <div class="alinhamento"></div>
+                </div>
+                <div style="display: flex">
+                    <img src="images/vitc.png" height="300px">
+                    <div>
+                        <h3>Vitamina C</h3>
+                        <p>&nbsp&nbsp&nbsp&nbsp&nbsp Assim como os humanos, os porquinhos da índia precisam de vitamina C, eles precisam retira-la dos alimentos pois não produzem ela naturalmente.</p>
+                        <p>&nbsp&nbsp&nbsp&nbsp&nbsp A falta de vitamina C pode acarretar em diversos problemas de saúde, <u>inclusive levar a morte</u>! Para previnir isso você precisa suprir a necessidade diária de vitamina C do porquinho que é de 10 a 30 mb/kg. Ela pode ser dada através de duas gotas de qualquer vitamina C pura que vende na farmácia (nunca dê polivitamínicos) ou até mesmo estar presente na composição da ração, como é o caso das rações da Nutrópica e Megazoo, além de dar frutas e vegetais ricos em vitamina C </p>
+                    </div>
+                    
+                </div>
+                <div class="alinhar">
+                    <div class="alinhamento"></div>
+                </div>
+                <div style="display: flex">
+                    <div>
+                        <h3>Nunca um sem o outro</h3>
+                        <p>&nbsp&nbsp&nbsp&nbsp&nbsp Porquinhos da índia são animais sociais e, na natureza, nunca estão sozinhos, eles sentem necessidade de interagir e conversar com outros porquinhos da índia. Sabendo disso, é sempre recomendavel que você crie pelo menos dois porquinhos da índia, você pode ter só um porquinho, porém deve estar disposto a dar atenção e companhia quase que integral a ele. Porquinhos podem sofrer com a solidão e, literalmente, <u>morrer de tristeza</u>.</p>
+                        
+                    </div>
+                    <img src="images/kindred.png" height="300px">
+                </div>
+                
+                <div>
+                    <p>Por isso, fique atento ao comportamento de seu porquinho, se ele estejer muito triste e viver sozinho pode ser a hora de dar a ele um amiguinho, lembrando sempre que é aconselhável só criar 2 porquinhos do mesmo sexo, pois sua reprodução é muito rápida e numerosa</p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div>
+                <ul class="footerBar">
+                    <li><a href="../../thanks.html">Agradecimentos</a></li>
+                    <li><a href="../../support.html">Suporte</a></li>
+                    <li><a href="../../donate.html">Doações</a></li>
+                </ul>
+            </div>
+            <h4>Gabriel Vannucchi Corrêa <br> 
+                1CCO - SPTech &copy; 2022</h4>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    
+    let proximaAtualizacao;
+
+    if(sessionStorage.ID_USUARIO != undefined){
+        b_usuario.innerHTML =  
+        `<div style="display:flex">
+            <div style="display:flex; flex-direction: column; justify-content: space-evenly; align-items: center;">
+                <span class="textoPerfil">Olá, ${sessionStorage.NOME_USUARIO}!</span>
+                <div style="display: flex">
+                    <button class="buttonPerfil" onclick="location.href='../../dashboard/dashboard.html'">Seu Perfil</button>
+                    <button class="buttonPerfil" onclick="limparSessao2()">Sair</button>
+                </div>
+            </div>
+            <img class="imgPerfil clickable" onclick="location.href='../../dashboard/dashboard.html'" src="${sessionStorage.PERFIL_USUARIO}">
+        </div>`;
+        headerComLogin.style.display = "block";
+        headerSemLogin.style.display = "none";
+        
+    }else{
+        headerComLogin.style.display = "none";
+        headerSemLogin.style.display = "block";
+
+    }
+    
+    //b_usuario.innerHTML = `${sessionStorage.NOME_USUARIO}, ${sessionStorage.ID_USUARIO}, ${sessionStorage.EMAIL_USUARIO}`;
+
+</script>

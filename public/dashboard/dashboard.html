@@ -21,7 +21,7 @@
 
 </head>
 
-<body onload="validarSessao(), atualizarFeed()">
+<body onload="validarSessao()">
     <!-- <body onload="validarSessao()"> -->
 
     <div class="header">
@@ -50,7 +50,7 @@
                     <div id="divAltFoto" style="display: none; align-items: center; flex-direction: column;">
                         <span style="font-weight: bold; font-size: 18px"><br>Insira o endereço da foto escolhida:</span>
                         <br>
-                        <input onkeyup="fotoPerfil.src = inpFoto.value" id="inpFoto" style="width: 200px" type="text"
+                        <input onkeyup="mudarFoto()" id="inpFoto" style="width: 200px" type="text"
                             placeholder="Dê preferencia a fotos quadradas">
                         <button class="btn" onclick="atualizarFoto()">Atualizar</button>
                     </div>
@@ -128,6 +128,15 @@
         var idVar = sessionStorage.ID_USUARIO;
         if (fotoVar == "") {
             alert("Insira uma foto!");
+        } else if (fotoVar.length > 500) {
+            alert("O tamanho de sua imagem é muito grande!");
+        } else if (fotoVar.indexOf(".png") == -1 && 
+                    fotoVar.indexOf(".jpg") == -1 && 
+                    fotoVar.indexOf(".jpeg") == -1 && 
+                    fotoVar.indexOf(".gif") == -1 && 
+                    fotoVar.indexOf(".ico") == -1 && 
+                    fotoVar.indexOf(".bmp") == -1) {
+            alert("Por favor insira uma extensão de imagem suportada! (png,jpg,jpeg,gif,ico,bmp)");
         } else {
             fetch("/../usuarios/cadastrarFoto", {
                 method: "POST",
@@ -282,4 +291,21 @@
         }
     }
 
+    function mudarFoto(){
+        fotoVar = inpFoto.value;
+        fotoPerfil.src = src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg";
+        if (fotoVar.indexOf(".png") == -1 && 
+                    fotoVar.indexOf(".jpg") == -1 && 
+                    fotoVar.indexOf(".jpeg") == -1 && 
+                    fotoVar.indexOf(".gif") == -1 && 
+                    fotoVar.indexOf(".ico") == -1 && 
+                    fotoVar.indexOf(".bmp") == -1){
+            fotoPerfil.src = src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg";
+        }else if(fotoVar == ''){
+            fotoPerfil.src = src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg";
+        }else{
+
+            fotoPerfil.src = fotoVar;
+        }
+    }
 </script>
