@@ -441,3 +441,56 @@ button {
 .flytop{
     margin-top: 20px;
 }
+#divPostagens{
+    width: fit-content;
+}
+.postagem{
+    display: flex;
+    border-radius: 30px;
+    margin-left: 35px;
+    margin-right: 35px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #F4DFBA;
+    border-top: 3px solid #CA965C;
+    border-left: 3px solid #CA965C;
+    border-right: 3px solid #876445;
+    border-bottom: 3px solid #876445;
+}
+.container .texto2{
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.corpoPostagem{
+    width: 100%;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 20px;
+}
+.imgPostagem{
+    width: 350px;
+    height: 200px;
+    border-radius: 30px;
+    border-top: 3px solid #CA965C;
+    border-left: 3px solid #CA965C;
+    border-right: 3px solid #876445;
+    border-bottom: 3px solid #876445;
+}
+.postagem{
+    width: 90%;
+}
+#imgToPost{
+    
+    width: 250px;
+    height: 165px;
+    border-radius: 30px;
+    border-top: 3px solid #CA965C;
+    border-left: 3px solid #CA965C;
+    border-right: 3px solid #876445;
+    border-bottom: 3px solid #876445;
+}

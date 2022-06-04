@@ -88,6 +88,15 @@ function buscarNumero(id) {
     return database.executar(instrucao);
 }
 
+function atualizarPostagens(especie) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", especie)
+    var instrucao = `
+        select * from postagem, usuario where especie = '${especie}' and id = fkUsuario order by dataPostagem desc limit 10;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     entrar,
     cadastrar,
@@ -95,6 +104,7 @@ module.exports = {
     cadastrarSenha,
     cadastrarNome,
     cadastrarPostagem,
+    atualizarPostagens,
     buscarNumero,
     listar,
 };

@@ -20,6 +20,4 @@ create table postagem(
     dataPostagem datetime,
     check (especie in('pdi','hmc','frt','grb','twt','hms','chn','mco'))
 );
-truncate postagem;
-select count(fkUsuario) from postagem where fkUsuario = 1;
 insert into postagem values (1,1,'https://i.imgur.com/4d4mNrF.png', 'Titulo teste','texto teste', 'pdi',now());

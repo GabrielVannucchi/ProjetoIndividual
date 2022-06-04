@@ -36,6 +36,10 @@ router.post("/buscarNumero", function (req, res) {
     usuarioController.buscarNumero(req, res);
 })
 
+router.post("/atualizarPostagens", function (req, res) {
+    usuarioController.atualizarPostagens(req, res);
+})
+
 router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
 });

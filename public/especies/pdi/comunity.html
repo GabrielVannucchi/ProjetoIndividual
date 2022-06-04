@@ -15,7 +15,7 @@
         text-align: center;
     }
 </style>
-<body>
+<body onload="atualizarPostagens('pdi');">
     <div class="header">
         <div class="container">
             <img class="clickable" onclick="location.href='../../index.html'" src="../../images/logo.png" alt="logo" style="height: 120px">
@@ -42,18 +42,27 @@
     </div>
     <div class="info fly ">
         <div class="container">
-            <div class="texto">
-                <div>
-                    Posts
+            <div class="texto2">
+                <div id="divPostagens">
+                    
                 </div>
                 <div>
                     <div id="divPostLogado">
-                        <button class="btn" onclick="abrirPostagem()">Fazer uma postagem</button><br>
+                        <button id="btFazerPostagem" class="btn" onclick="abrirPostagem()">Fazer uma postagem</button><br>
                         <div id="divPost" style="display: none;">
-                            Titulo: <input id="inpTitulo" type="text"><br>
-                            Foto: <input type="text" id="inpFoto"><br>
-                            Texto: <br>
-                            <input type="text" id="inpTexto"><br>
+                            <div>
+                                <div style="display: flex">
+                                    <img id="imgToPost" src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg">
+                                    <div style="margin-left: 50px">
+                                        Titulo: <input id="inpTitulo" type="text"><br>
+                                        Foto: <input onkeyup="imgToPost.src = inpFoto.value"  type="text" id="inpFoto"><br>
+                                    </div>
+                                </div>
+                                Texto: <br>
+                                <textarea type="text" id="inpTexto" style="width: 600px; height: 200px;"></textarea><br>
+                            </div>
+                            
+                            
                             <button class="btn" id="btPublicar" onclick="postar('pdi')">Publicar</button>
                         </div>
                     </div>
@@ -106,10 +115,16 @@
 
     }
     
+
+
     //b_usuario.innerHTML = `${sessionStorage.NOME_USUARIO}, ${sessionStorage.ID_USUARIO}, ${sessionStorage.EMAIL_USUARIO}`;
 
     function abrirPostagem() {
         divPost.style.display = 'block';
+        btFazerPostagem.style.display = 'none';
+        inpTitulo.value = '';
+        inpFoto.value = '';
+        inpTexto.value = '';
     }
 
     function postar(especie) {
@@ -144,7 +159,6 @@
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    console.log(json.qtdPostagem + ':AAAAAAAAAAAAAAAAAAAA');
 
                     idPostagem =json.qtdPostagem;
                     
@@ -198,7 +212,8 @@
                         alert("Cadastro realizado com sucesso!");
                         
                         divPost.style.display = 'none';
-
+                        btFazerPostagem.style.display = 'block';
+                        atualizarPostagens(especie);
                     } else {
                         throw ("Houve um erro ao tentar realizar o cadastro!");
                     }
@@ -207,4 +222,71 @@
 
                 });
     }
+
+    function atualizarPostagens(especie) {
+        fetch("/usuarios/atualizarPostagens", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                especieServer: especie
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+            divPostagens.innerHTML = '';
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    console.log('RESULTADO: ' + json);
+                    console.log('RESULTADO: ' + JSON.stringify(json));
+
+                    //postagens =json.qtdPostagem;
+                    for(var i = 0; i < json.length; i++){
+
+                        if(json[i].imgPost == 'sem imagem'){
+                            divPostagens.innerHTML += `
+                            <div class="postagem">
+                                
+                                <div class="corpoPostagem">
+                                    <h3>${json[i].titulo} - ${json[i].nome}</h3>
+                                    <div>${json[i].texto}</div>
+                                    
+                                </div>
+                            </div><br>`;
+                        } else if(i % 2 == 0){
+                                divPostagens.innerHTML += `
+                            <div class="postagem">
+                                
+                                <div class="corpoPostagem">
+                                    <h3>${json[i].titulo} - ${json[i].nome}</h3>
+                                    <div>${json[i].texto}</div>
+                                    
+                                </div>
+                                <img class="imgPostagem" src="${json[i].imgPost}">
+                            </div><br>`;
+                            }else{
+                                divPostagens.innerHTML += `
+                            <div class="postagem">
+                                <img class="imgPostagem" src="${json[i].imgPost}">
+                                <div class="corpoPostagem">
+                                    <h3>${json[i].titulo} - ${json[i].nome}</h3>
+                                    <div>${json[i].texto}</div>
+                                    
+                                </div>
+                            </div><br>`;
+                            }
+                    }
+
+                });
+                
+            } else {
+                throw ("Houve um erro ao tentar realizar a consulta!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            
+        });
+    }
+    
 </script>
