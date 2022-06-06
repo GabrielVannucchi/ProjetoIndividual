@@ -97,6 +97,31 @@ function atualizarPostagens(especie) {
     return database.executar(instrucao);
 }
 
+function buscarFoto(especie) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", especie)
+    var instrucao;
+    if(especie == 'nda'){
+        instrucao = `
+        select * from postagem where imgPost <> 'sem imagem';
+    `;
+    }else{
+        instrucao = `
+        select * from postagem where especie = '${especie}' and imgPost <> 'sem imagem';
+    `; 
+    }
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function suporte(id, motivo, especie, titulo, texto) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", id, motivo, especie, titulo, texto)
+    var instrucao = `
+        insert into suporte values (null, ${id},'${motivo}','${especie}','${titulo}','${texto}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     entrar,
     cadastrar,
@@ -106,5 +131,7 @@ module.exports = {
     cadastrarPostagem,
     atualizarPostagens,
     buscarNumero,
-    listar,
+    buscarFoto,
+    suporte,
+    listar
 };

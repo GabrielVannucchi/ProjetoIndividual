@@ -40,8 +40,16 @@ router.post("/atualizarPostagens", function (req, res) {
     usuarioController.atualizarPostagens(req, res);
 })
 
+router.post("/suporte", function (req, res) {
+    usuarioController.suporte(req, res);
+})
+
 router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
+});
+
+router.post("/buscarFoto", function (req, res) {
+    usuarioController.buscarFoto(req, res);
 });
 
 module.exports = router;

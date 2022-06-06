@@ -23,18 +23,52 @@
             </div>
         </div>
     </div>
-    <div class="info fly flytop">
-        <div class="container">         
-            <div class="bichoTitulo">
-                Suporte
-                
-            </div>
-        </div>
-    </div>
-    <div class="info fly flytop">
+    <div class="login">
         <div class="container">
-            <div class="texto">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus consequatur nostrum, eos labore delectus reprehenderit, libero quasi aperiam, perferendis laborum rerum consectetur est? Enim ipsa ut minima reiciendis ea ad?
+            <div class="card">
+                <h2>Fale Conosco!</h2>
+                <div class="card_erro" id="cardErro">
+                    <span id="mensagem_erro"></span>
+                </div>
+                <div class="formulario" id="divFormulario" style="display: none">
+
+
+                    <span class="tipo_campo">Motivo:</span>
+                    <select id="slMotivo">
+                        <option value=0>Escolha uma opção</option>
+                        <option value=1>Sugestão</option>
+                        <option value=2>Reclamação</option>
+                        <option value=3>Informação</option>
+                        <option value=4>Outros</option>
+                    </select>
+                    
+                    <span class="tipo_campo">Bichinho:</span>
+                    <select id="slEspecie">
+                        <option value=0>Escolha uma opção</option>
+                        <option value=1>Não se aplica</option>
+                        <option value=2>Chinchila</option>
+                        <option value=3>Furão // Ferret</option>
+                        <option value=4>Esquilo da Mongólia // Gerbil</option>
+                        <option value=5>Hamster Chinês</option>
+                        <option value=6>Hamster Sirio</option>
+                        <option value=7>Mini Coelho</option>
+                        <option value=8>Porquinho da Índia</option>
+                        <option value=9>Rato Twister</option>
+                    </select>
+                    
+
+                    <span class="tipo_campo">Titulo:</span>
+                    <input id="inpTitulo" type="text">
+
+                    <textarea id="txtTexto"></textarea>
+
+                    <button class="btn" onclick="Enviar()">Enviar</button><br>
+
+                </div>
+                <div class="" id="divNaoLogado">
+                    Faça o login para falar conosco.
+                </div>
+
             </div>
         </div>
     </div>
@@ -71,13 +105,131 @@
         </div>`;
         headerComLogin.style.display = "block";
         headerSemLogin.style.display = "none";
+        divFormulario.style.display = "flex";
+        divNaoLogado.style.display = "none";
         
     }else{
         headerComLogin.style.display = "none";
         headerSemLogin.style.display = "block";
+        divFormulario.style.display = "none";
+        divNaoLogado.style.display = "block";
+
 
     }
+
+    function Enviar() {
+
+        var idVar = sessionStorage.ID_USUARIO;
+        var motivoVar = Number(slMotivo.value);
+        switch (motivoVar) {
+            case 0:
+                alert("Escolha um motivo!");
+                return false;
+            case 1:
+                motivoVar = 'Sugestão';
+                break;
+            case 2:
+                motivoVar = 'Reclamação';
+                break;
+            case 3:
+                motivoVar = 'Informação';
+                break;
+            case 4:
+                motivoVar = 'Outros';
+                break;
+        }
+
+        var especieVar = Number(slEspecie.value);
+        switch (especieVar) {
+            case 0:
+                alert("Escolha um bichinho!");
+                return false;
+            case 1:
+                especieVar = 'n/a';
+                break;
+            case 2:
+                especieVar = 'chn';
+                break;
+            case 3:
+                especieVar = 'frt';
+                break;
+            case 4:
+                especieVar = 'grb';
+                break;
+            case 5:
+                especieVar = 'hmc';
+                break;
+            case 6:
+                especieVar = 'hms';
+                break;
+            case 7:
+                especieVar = 'mco';
+                break;
+            case 8:
+                especieVar = 'pdi';
+                break;
+            case 9:
+                especieVar = 'twt';
+                break;
+        }
+
+        var tituloVar = inpTitulo.value;
+        if(inpTitulo.value.length > 100){
+            alert("Seu titulo é muito grande!");
+            return false;
+        }
+
+        var textoVar = txtTexto.value;
+        if(txtTexto.value.length > 2000){
+            alert("Seu texto é muito grande!")
+        }
+
+
+        fetch("/usuarios/suporte", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idServer: idVar,
+                motivoServer: motivoVar,
+                especieServer: especieVar,
+                tituloServer: tituloVar,
+                textoServer: textoVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO enviar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    alert(motivoVar + " registrado com sucesso!");
+                    slMotivo.value = 0;
+                    slEspecie.value = 0;
+                    inpTitulo.value = '';
+                    txtTexto.value = '';
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar registrar o chamado!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
     
-    //b_usuario.innerHTML = `${sessionStorage.NOME_USUARIO}, ${sessionStorage.ID_USUARIO}, ${sessionStorage.EMAIL_USUARIO}`;
 
 </script>

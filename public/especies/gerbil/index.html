@@ -25,7 +25,7 @@
     </div>
     <div class="bicho">
         <div class="container">         
-            <img src="../../images/gerbilSemana.png">
+            <img id="imgBichinho" src="">
             <div class="bichoTitulo" style="text-align: center">
                 Gerbil 
                 <div class="alinhar">
@@ -103,4 +103,38 @@
     // só mexer se quiser alterar o tempo de atualização
     // ou se souber o que está fazendo!
     
+    buscarFoto('grb');
+    function buscarFoto(especie) {
+        fetch("/usuarios/buscarFoto", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                especieServer: especie
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    console.log('RESULTADO: ' + json);
+                    console.log('RESULTADO: ' + JSON.stringify(json));
+
+                    if(json.length > 0){
+                        imgBichinho.src = json[Math.trunc((Math.random() * json.length),0)].imgPost;
+                    }else{
+                        imgBichinho.src = "../../images/gerbilSemana.png";
+                    }
+
+                });
+                
+            } else {
+                throw ("Houve um erro ao tentar realizar a consulta!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            
+        });
+    }
 </script>

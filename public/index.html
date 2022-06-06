@@ -25,7 +25,7 @@
     </div>
     <div class="banner">
         <div class="container">
-            <img id="imgBanner" src="images/porquinhoPlaceHolder.png">
+            <img id="imgBanner" src="">
             <div id="textoBanner">
                 Tudo o que você precisa saber para o bem estar do seu peludinho
             </div>
@@ -117,4 +117,38 @@
     //b_usuario.innerHTML = `${sessionStorage.NOME_USUARIO}, ${sessionStorage.ID_USUARIO}, ${sessionStorage.EMAIL_USUARIO}`;
 
     
+    buscarFoto('nda');
+    function buscarFoto(especie) {
+        fetch("/usuarios/buscarFoto", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                especieServer: especie
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    console.log('RESULTADO: ' + json);
+                    console.log('RESULTADO: ' + JSON.stringify(json));
+
+                    if(json.length > 0){
+                        imgBanner.src = json[Math.trunc((Math.random() * json.length),0)].imgPost;
+                    }else{
+                        imgBanner.src = "images/porquinhoPlaceHolder.png";
+                    }
+
+                });
+                
+            } else {
+                throw ("Houve um erro ao tentar realizar a consulta!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            
+        });
+    }
 </script>

@@ -494,3 +494,18 @@ button {
     border-right: 3px solid #876445;
     border-bottom: 3px solid #876445;
 }
+.formulario select {
+    margin-bottom: 10px;
+    border: 2px solid #CA965C;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+.formulario textarea{
+    
+    margin-bottom: 10px;
+    border: 2px solid #CA965C;
+    padding: 10px;
+    border-radius: 10px;
+    height: 200px;
+}
