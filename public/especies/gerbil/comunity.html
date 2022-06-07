@@ -37,7 +37,9 @@
                 Comunidade Esquilo da Mongólia
                 
             </div>
-            <div style="width: 62px;"></div>
+            <div style="display: flex">
+            Posts: <span id="spPosts">100</span>
+            </div>
         </div>
     </div>
     <div class="info fly ">
@@ -258,6 +260,7 @@
                     console.log('RESULTADO: ' + JSON.stringify(json));
 
                     //postagens =json.qtdPostagem;
+                    spPosts.innerHTML = json.length;
                     for(var i = 0; i < json.length; i++){
 
                         if(json[i].imgPost == 'sem imagem'){
