@@ -27,6 +27,7 @@ create table suporte(
     foreign key (fkUsuario) references usuario(id),
     motivo varchar(10),
     especie char(3),
+    titulo varchar(100),
     texto varchar(2000),
     check (especie in('pdi','hmc','frt','grb','twt','hms','chn','mco','n/a'))
 );
